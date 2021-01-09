@@ -1,0 +1,40 @@
+header.encabezado{
+    background-color:  #f5ebe3;
+    padding-right: 20px;
+    padding-left: 20px;
+    background-color:   #f2f2f2 ;
+}
+
+body{
+    
+    background-color:  #f9f9f9;
+}
+
+section{
+    background-color:  #f7f7f7;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+section.formularios{
+    text-align: center;
+}
+
+h5.adminSistema{
+    text-align: center;
+}
+
+h4.adminSistema{
+    text-align: center;
+}
+
+button{
+    margin: 0 auto;
+}
+
+div.botones{
+    text-align:center;
+}
+

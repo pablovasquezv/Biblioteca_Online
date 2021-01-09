@@ -1,0 +1,40 @@
+CREATE VIEW librosPersonales AS
+SELECT usuario.rut_usuario, usuario.nombres_usuario, usuario.ap_paterno_usuario, usuario.ap_paterno_materno,
+       libro.id_libro, libro.titulo_libro, libro.fecha_lanzamiento_libro, libro.num_paginas_libro,
+       autor.id_autor, autor.nombre_autor, autor.apellido_autor, genero.id_genero, genero.nombre_genero,
+       editorial.id_editorial, editorial.nombre_editorial, libro.descripcion_libro
+FROM usuario, libro, autor, genero, editorial
+WHERE usuario.rut_usuario = libro.rut_usuarioTL
+AND libro.id_autorTL = autor.id_autor
+AND libro.id_generoTL = genero.id_genero
+AND libro.id_editorialTL = editorial.id_editorial
+
+
+Vista prestamos donde sale el nombre del dueño del libro
+
+CREATE VIEW vistaPrestamos AS
+SELECT prestamo.id_prestamo, prestamo.rut_usuario_prestador as "Rut_prestador", usuario.nombres_usuario as "Nombre_prestador", usuario.ap_paterno_usuario as "Apellido_prestador",
+prestamo.rut_usuario_prestatario as "Rut_prestatario", libro.titulo_libro, punto_intercambio.nombre_pto_intercambio, punto_intercambio.direccion_pto_intercambio, prestamo.dias_prestamo, prestamo.fecha_inicio_prestamo, 
+prestamo.fecha_termino_prestamo, estado_prestamo.nombre_estado_prestamo
+FROM prestamo, usuario, punto_intercambio, libro,  estado_prestamo
+WHERE usuario.rut_usuario = prestamo.rut_usuario_prestador
+AND libro.id_libro = prestamo.id_libroTP
+AND punto_intercambio.id_pto_intercambio = prestamo.id_pto_intercambioTP
+AND prestamo.id_estado_prestamoTP = estado_prestamo.id_estado_prestamo
+
+Vista prestamos donde sale el nombre de la persona que hace la peticion del prestamo
+CREATE VIEW vistaPrestamosPrestatario AS
+SELECT prestamo.id_prestamo, prestamo.rut_usuario_prestatario as "Rut_prestatario", usuario.nombres_usuario as "Nombre_prestatario", usuario.ap_paterno_usuario as "Apellido_prestatario",
+ prestamo.rut_usuario_prestador as "Rut_prestador", libro.titulo_libro, punto_intercambio.nombre_pto_intercambio, punto_intercambio.direccion_pto_intercambio, prestamo.dias_prestamo, prestamo.fecha_inicio_prestamo, 
+prestamo.fecha_termino_prestamo, estado_prestamo.nombre_estado_prestamo
+FROM prestamo, usuario, punto_intercambio, libro,  estado_prestamo
+WHERE usuario.rut_usuario = prestamo.rut_usuario_prestatario
+AND libro.id_libro = prestamo.id_libroTP
+AND punto_intercambio.id_pto_intercambio = prestamo.id_pto_intercambioTP
+AND prestamo.id_estado_prestamoTP = estado_prestamo.id_estado_prestamo
+
+
+CREATE VIEW ciudadRegion AS
+SELECT ciudad.id_ciudad, ciudad.nombre_ciudad, region.id_region, region.nombre_region
+FROM ciudad, region
+WHERE ciudad.id_regionTC = region.id_region
